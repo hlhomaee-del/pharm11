@@ -950,7 +950,7 @@ const MODULES = [
   ]
 },
 {
-  id:'mental',title:'Mental Health & Neuro',desc:'SSRIs, benzodiazepines, antiseizure medications.',icon:'🧠',color:'#818cf8',
+  id:'mental',title:'Mental Health & Neuro',desc:'SSRIs, SNRIs, benzodiazepines, antiseizure medications.',icon:'🧠',color:'#818cf8',
   classes:[
     {
       name:'SSRIs',suffix:'Various',clr:'#818cf8',examples:['sertraline','fluoxetine','escitalopram'],
@@ -966,6 +966,22 @@ const MODULES = [
         {q:'SSRIs work by:',opts:['Blocking dopamine','Increasing serotonin availability','Decreasing norepinephrine','Blocking GABA'],correct:1,rationale:'SSRIs (Selective Serotonin Reuptake Inhibitors) work by preventing the reabsorption of serotonin, making more available in the brain.'},
         {q:'A patient who just started an SSRI reports increased agitation and anxiety. You should:',opts:['Tell them it will pass on its own','Report to the provider; close monitoring is needed early in treatment','Stop the medication','Ignore it'],correct:1,rationale:'Increased agitation early in SSRI treatment requires monitoring and should be reported, especially in younger patients.'},
         {q:'Signs of serotonin syndrome include:',opts:['Slow heart rate and drowsiness','Agitation, rapid heartbeat, high temperature, muscle twitching','Low blood pressure and fatigue only','Dry cough'],correct:1,rationale:'Serotonin syndrome is a potentially life-threatening condition caused by too much serotonin, with symptoms including agitation, rapid heartbeat, hyperthermia, and muscle twitching.'},
+      ]
+    },
+    {
+      name:'SNRIs',suffix:'Various',clr:'#8b5cf6',examples:['venlafaxine','duloxetine','desvenlafaxine'],
+      action:'Improves mood and anxiety by increasing both serotonin and norepinephrine in the brain.',
+      conditions:'Depression, anxiety disorders, nerve pain, fibromyalgia.',
+      watchFor:['Blood pressure increase','Sweating','Agitation','Sleep changes','Dilated pupils'],
+      report:'Report severe agitation, high blood pressure, fast heartbeat, serotonin syndrome signs, or major pupil dilation with severe symptoms.',
+      warnings:['Can raise blood pressure because norepinephrine activity increases.','Monitor for serotonin syndrome and early mood changes.'],
+      contraindications:['Use with MAOIs','Uncontrolled hypertension (caution)','Serotonin syndrome risk with certain combinations'],
+      bodyEffect:{type:'brain',before:'Low serotonin and norepinephrine levels; low mood, low drive, poor focus',after:'Serotonin and norepinephrine increase; mood improves, alertness may increase, pupils may dilate'},
+      flashcard:{front:'SNRIs',back:'Examples: venlafaxine, duloxetine. Action: Increase serotonin and norepinephrine. Watch: blood pressure, sweating, agitation, sleep changes, serotonin syndrome.'},
+      questions:[
+        {q:'SNRIs work mainly by:',opts:['Blocking only dopamine reuptake','Increasing serotonin and norepinephrine availability','Blocking acetylcholine receptors only','Enhancing GABA only'],correct:1,rationale:'SNRIs inhibit reuptake of both serotonin and norepinephrine, leaving more of both neurotransmitters available in the synapse.'},
+        {q:'A patient taking an SNRI should be monitored carefully for:',opts:['High blood pressure and agitation','Dry cough from bradykinin buildup','Low potassium from urine loss','Black tarry stools from ulcer disease only'],correct:0,rationale:'Because norepinephrine activity increases with SNRIs, patients may develop elevated blood pressure, agitation, sweating, or increased alertness.'},
+        {q:'Compared with SSRIs, SNRIs increase serotonin plus:',opts:['GABA','Histamine','Norepinephrine','Insulin'],correct:2,rationale:'SNRIs increase serotonin and norepinephrine, while SSRIs focus on serotonin.'},
       ]
     },
     {
@@ -1249,54 +1265,32 @@ function renderBodyDiagram(cls,el){
     fluid:`<svg viewBox="0 0 220 340" width="220" id="bodyDiagramSVG">
       <defs>
         <clipPath id="bodyClip">
-          <!-- Head -->
           <circle cx="110" cy="32" r="22"/>
-          <!-- Neck -->
           <rect x="102" y="52" width="16" height="14" rx="4"/>
-          <!-- Torso -->
           <path d="M72 66 Q70 66 68 72 L62 130 Q60 148 72 150 L148 150 Q160 148 158 130 L152 72 Q150 66 148 66 Z"/>
-          <!-- Left arm -->
           <path d="M68 72 L42 78 Q34 80 32 88 L28 140 Q26 148 32 150 L44 150 Q50 148 50 140 L54 100 L62 100"/>
-          <!-- Right arm -->
           <path d="M152 72 L178 78 Q186 80 188 88 L192 140 Q194 148 188 150 L176 150 Q170 148 170 140 L166 100 L158 100"/>
-          <!-- Left hand -->
           <circle cx="38" cy="155" r="10"/>
-          <!-- Right hand -->
           <circle cx="182" cy="155" r="10"/>
-          <!-- Left leg -->
           <path d="M78 148 L72 230 Q70 242 68 260 Q66 272 74 274 L90 274 Q96 272 94 260 L92 230 L96 148"/>
-          <!-- Right leg -->
           <path d="M124 148 L128 230 Q126 242 128 260 Q130 272 136 274 L150 274 Q156 272 154 260 L148 230 L142 148"/>
         </clipPath>
       </defs>
-      <!-- Body outline -->
-      <!-- Head -->
       <circle cx="110" cy="32" r="22" fill="none" stroke="#4f8cff" stroke-width="1.5" opacity=".5"/>
-      <!-- Eyes -->
       <circle cx="103" cy="29" r="2" fill="#4f8cff" opacity=".4"/>
       <circle cx="117" cy="29" r="2" fill="#4f8cff" opacity=".4"/>
-      <!-- Neck -->
       <rect x="102" y="52" width="16" height="14" rx="4" fill="none" stroke="#4f8cff" stroke-width="1.5" opacity=".5"/>
-      <!-- Torso -->
       <path d="M72 66 Q70 66 68 72 L62 130 Q60 148 72 150 L148 150 Q160 148 158 130 L152 72 Q150 66 148 66 Z" fill="none" stroke="#4f8cff" stroke-width="1.5" opacity=".5"/>
-      <!-- Left arm -->
       <path d="M68 72 L42 78 Q34 80 32 88 L28 140 Q26 148 32 150 L44 150 Q50 148 50 140 L54 100 L62 100" fill="none" stroke="#4f8cff" stroke-width="1.5" opacity=".5"/>
-      <!-- Right arm -->
       <path d="M152 72 L178 78 Q186 80 188 88 L192 140 Q194 148 188 150 L176 150 Q170 148 170 140 L166 100 L158 100" fill="none" stroke="#4f8cff" stroke-width="1.5" opacity=".5"/>
-      <!-- Left hand -->
       <circle cx="38" cy="155" r="10" fill="none" stroke="#4f8cff" stroke-width="1.5" opacity=".5"/>
-      <!-- Right hand -->
       <circle cx="182" cy="155" r="10" fill="none" stroke="#4f8cff" stroke-width="1.5" opacity=".5"/>
-      <!-- Left leg -->
       <path d="M78 148 L72 230 Q70 242 68 260 Q66 272 74 274 L90 274 Q96 272 94 260 L92 230 L96 148" fill="none" stroke="#4f8cff" stroke-width="1.5" opacity=".5"/>
-      <!-- Right leg -->
       <path d="M124 148 L128 230 Q126 242 128 260 Q130 272 136 274 L150 274 Q156 272 154 260 L148 230 L142 148" fill="none" stroke="#4f8cff" stroke-width="1.5" opacity=".5"/>
-      <!-- Water fill inside body clipped to body shape -->
       <g clip-path="url(#bodyClip)">
         <rect id="fluidFill" x="0" y="10" width="220" height="270" fill="url(#waterGrad)" opacity=".7">
           <animate id="fluidWave" attributeName="y" values="10;14;10" dur="2.5s" repeatCount="indefinite"/>
         </rect>
-        <!-- Wave shimmer lines -->
         <line x1="30" x2="190" y1="80" y2="82" stroke="#93c5fd" stroke-width="1" opacity=".25"/>
         <line x1="40" x2="180" y1="120" y2="118" stroke="#93c5fd" stroke-width="1" opacity=".2"/>
         <line x1="35" x2="185" y1="160" y2="162" stroke="#93c5fd" stroke-width="1" opacity=".2"/>
@@ -1310,107 +1304,95 @@ function renderBodyDiagram(cls,el){
           <stop offset="100%" stop-color="#1d4ed8" stop-opacity=".75"/>
         </linearGradient>
       </defs>
-      <!-- Swelling indicators on legs -->
       <g id="swellMarks">
         <path d="M66 250 Q60 260 66 270" stroke="#f87171" stroke-width="1.5" fill="none" opacity=".7"/>
-        <path d="M96 250 Q102 260 96 270" stroke="#f87171" stroke-width="1.5" fill="none" opacity=".7"/>
-        <path d="M126 250 Q120 260 126 270" stroke="#f87171" stroke-width="1.5" fill="none" opacity=".7"/>
-        <path d="M156 250 Q162 260 156 270" stroke="#f87171" stroke-width="1.5" fill="none" opacity=".7"/>
+        <path d="M154 250 Q160 260 154 270" stroke="#f87171" stroke-width="1.5" fill="none" opacity=".7"/>
+        <path d="M72 246 Q66 255 72 264" stroke="#f87171" stroke-width="1" fill="none" opacity=".5"/>
+        <path d="M148 246 Q154 255 148 264" stroke="#f87171" stroke-width="1" fill="none" opacity=".5"/>
       </g>
-      <!-- Labels -->
-      <text x="110" y="300" text-anchor="middle" fill="#60a5fa" font-size="11" font-weight="600" id="statusText">Excess fluid / Edema</text>
-      <text x="110" y="318" text-anchor="middle" fill="#fbbf24" font-size="10" id="bpText">BP: 150/92</text>
-      <text x="110" y="334" text-anchor="middle" fill="#f87171" font-size="9" id="swellLabel">⬆ Swollen legs &amp; ankles</text>
+      <text x="110" y="306" text-anchor="middle" fill="#f87171" font-size="10" id="swellLabel">Edema / swelling present</text>
+      <text x="110" y="322" text-anchor="middle" fill="#fbbf24" font-size="10" id="bpText">BP: 160/96</text>
+      <text x="110" y="336" text-anchor="middle" fill="#8b90a5" font-size="8" id="statusText">High fluid volume inside body</text>
     </svg>`,
-    glucose:`<svg viewBox="0 0 200 240" width="200" id="bodyDiagramSVG">
-      <rect x="50" y="20" width="100" height="140" rx="30" fill="none" stroke="#4f8cff" stroke-width="2" opacity=".3"/>
-      <!-- Glucose particles -->
+    glucose:`<svg viewBox="0 0 260 280" width="260" id="bodyDiagramSVG">
+      <text x="130" y="18" text-anchor="middle" fill="#67e879" font-size="10" font-weight="600">GLUCOSE CONTROL</text>
+      <text x="130" y="34" text-anchor="middle" fill="#8b90a5" font-size="8">Bloodstream and body cells</text>
+      <rect x="25" y="60" width="210" height="56" rx="28" fill="#1e293b" stroke="#ef4444" stroke-width="2" opacity=".7"/>
+      <text x="130" y="92" text-anchor="middle" fill="#fca5a5" font-size="9">Blood vessel full of glucose</text>
       <g id="glucoseDots">
-        <circle cx="75" cy="50" r="5" fill="#fbbf24" opacity=".7"/><circle cx="110" cy="60" r="5" fill="#fbbf24" opacity=".7"/>
-        <circle cx="90" cy="80" r="5" fill="#fbbf24" opacity=".7"/><circle cx="120" cy="95" r="5" fill="#fbbf24" opacity=".7"/>
-        <circle cx="80" cy="110" r="5" fill="#fbbf24" opacity=".7"/><circle cx="105" cy="125" r="5" fill="#fbbf24" opacity=".7"/>
-        <circle cx="95" cy="140" r="5" fill="#fbbf24" opacity=".7"/><circle cx="115" cy="45" r="5" fill="#fbbf24" opacity=".7"/>
+        <circle cx="55" cy="88" r="7" fill="#fbbf24"/>
+        <circle cx="82" cy="78" r="6" fill="#fbbf24"/>
+        <circle cx="104" cy="92" r="7" fill="#fbbf24"/>
+        <circle cx="130" cy="80" r="7" fill="#fbbf24"/>
+        <circle cx="155" cy="92" r="6" fill="#fbbf24"/>
+        <circle cx="178" cy="78" r="7" fill="#fbbf24"/>
+        <circle cx="205" cy="88" r="6" fill="#fbbf24"/>
       </g>
-      <text x="100" y="185" text-anchor="middle" fill="#fbbf24" font-size="12" id="glucoseText">Glucose: 280 mg/dL</text>
-      <text x="100" y="205" text-anchor="middle" fill="#f87171" font-size="10" id="statusText">HIGH blood sugar</text>
+      <rect x="35" y="150" width="62" height="62" rx="10" fill="#102a1c" stroke="#67e879" stroke-width="1.5"/>
+      <rect x="99" y="150" width="62" height="62" rx="10" fill="#102a1c" stroke="#67e879" stroke-width="1.5"/>
+      <rect x="163" y="150" width="62" height="62" rx="10" fill="#102a1c" stroke="#67e879" stroke-width="1.5"/>
+      <text x="66" y="184" text-anchor="middle" fill="#67e879" font-size="8">CELL</text>
+      <text x="130" y="184" text-anchor="middle" fill="#67e879" font-size="8">CELL</text>
+      <text x="194" y="184" text-anchor="middle" fill="#67e879" font-size="8">CELL</text>
+      <path d="M66 136 L66 150" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="4,4"/>
+      <path d="M130 136 L130 150" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="4,4"/>
+      <path d="M194 136 L194 150" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="4,4"/>
+      <text x="130" y="238" text-anchor="middle" fill="#fbbf24" font-size="11" id="glucoseText">Glucose: 240 mg/dL</text>
+      <text x="130" y="258" text-anchor="middle" fill="#8b90a5" font-size="9" id="statusText">Too much sugar staying in the blood</text>
     </svg>`,
-    airway:`<svg viewBox="0 0 200 240" width="200" id="bodyDiagramSVG">
-      <!-- Lungs outline -->
-      <ellipse cx="70" cy="100" rx="35" ry="50" fill="none" stroke="#4f8cff" stroke-width="2" opacity=".3"/>
-      <ellipse cx="130" cy="100" rx="35" ry="50" fill="none" stroke="#4f8cff" stroke-width="2" opacity=".3"/>
-      <!-- Airway -->
-      <path d="M100 30 L100 60 Q90 70 80 90" stroke="#f87171" stroke-width="6" fill="none" id="airwayL" stroke-linecap="round"/>
-      <path d="M100 60 Q110 70 120 90" stroke="#f87171" stroke-width="6" fill="none" id="airwayR" stroke-linecap="round"/>
-      <!-- Narrowing indicators -->
-      <text x="85" y="80" fill="#fbbf24" font-size="10" id="narrow1">×</text>
-      <text x="112" y="80" fill="#fbbf24" font-size="10" id="narrow2">×</text>
-      <text x="100" y="175" text-anchor="middle" fill="#f87171" font-size="10" id="statusText">Airways constricted</text>
-      <text x="100" y="195" text-anchor="middle" fill="#8b90a5" font-size="9">Breathing: Labored</text>
+    airway:`<svg viewBox="0 0 260 280" width="260" id="bodyDiagramSVG">
+      <text x="130" y="18" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="600">BRONCHODILATOR EFFECT</text>
+      <text x="130" y="34" text-anchor="middle" fill="#8b90a5" font-size="8">Cross-section of narrowed airways</text>
+      <ellipse cx="92" cy="120" rx="48" ry="74" fill="#2c120f" stroke="#fb923c" stroke-width="2" opacity=".55"/>
+      <ellipse cx="168" cy="120" rx="48" ry="74" fill="#2c120f" stroke="#fb923c" stroke-width="2" opacity=".55"/>
+      <ellipse id="airwayL" cx="92" cy="120" rx="18" ry="42" fill="#7dd3fc" opacity=".6" stroke="#f87171" stroke-width="5"/>
+      <ellipse id="airwayR" cx="168" cy="120" rx="18" ry="42" fill="#7dd3fc" opacity=".6" stroke="#f87171" stroke-width="5"/>
+      <text id="narrow1" x="92" y="120" text-anchor="middle" fill="#f87171" font-size="10" font-weight="700">narrow</text>
+      <text id="narrow2" x="168" y="120" text-anchor="middle" fill="#f87171" font-size="10" font-weight="700">narrow</text>
+      <text x="130" y="226" text-anchor="middle" fill="#f87171" font-size="10" id="statusText">Before: bronchospasm limits airflow</text>
+      <text x="130" y="244" text-anchor="middle" fill="#94a3b8" font-size="8">After medication, smooth muscle relaxes and the airway opens</text>
     </svg>`,
     blood:`<svg viewBox="0 0 260 300" width="260" id="bodyDiagramSVG">
-      <text x="130" y="16" text-anchor="middle" fill="#f472b6" font-size="10" font-weight="600">BLOOD &amp; CLOTTING</text>
-      <!-- LEFT: Blood vessel with clot -->
-      <text x="70" y="38" text-anchor="middle" fill="#8b90a5" font-size="8">BLOOD VESSEL</text>
-      <!-- Vessel walls -->
-      <rect x="30" y="48" width="80" height="140" rx="16" fill="#1a1020" stroke="#f472b6" stroke-width="1.5" opacity=".6"/>
-      <!-- Blood flow (thick/slow before) -->
+      <text x="130" y="18" text-anchor="middle" fill="#f472b6" font-size="10" font-weight="600">ANTICOAGULANT / ANTIPLATELET EFFECT</text>
+      <text x="65" y="42" text-anchor="middle" fill="#8b90a5" font-size="8">BLOOD VESSEL</text>
+      <rect x="20" y="58" width="90" height="122" rx="18" fill="#1a1020" stroke="#4f8cff" stroke-width="1.5" opacity=".55"/>
       <g id="bloodFlow">
-        <!-- Thick clotted blood cells -->
-        <circle cx="50" cy="70" r="7" fill="#dc2626" opacity=".9"/>
-        <circle cx="72" cy="65" r="6" fill="#dc2626" opacity=".85"/>
-        <circle cx="60" cy="85" r="7" fill="#dc2626" opacity=".9"/>
-        <circle cx="82" cy="80" r="6" fill="#dc2626" opacity=".85"/>
-        <circle cx="55" cy="105" r="7" fill="#dc2626" opacity=".9"/>
-        <circle cx="78" cy="100" r="7" fill="#dc2626" opacity=".9"/>
-        <circle cx="65" cy="120" r="6" fill="#dc2626" opacity=".85"/>
-        <circle cx="48" cy="130" r="7" fill="#dc2626" opacity=".9"/>
-        <circle cx="80" cy="125" r="6" fill="#dc2626" opacity=".85"/>
-        <circle cx="58" cy="148" r="7" fill="#dc2626" opacity=".9"/>
-        <circle cx="75" cy="145" r="6" fill="#dc2626" opacity=".85"/>
-        <circle cx="65" cy="165" r="7" fill="#dc2626" opacity=".9"/>
-        <!-- Clot cluster -->
-        <g id="clotCluster">
-          <circle cx="62" cy="110" r="10" fill="#991b1b" opacity=".8" stroke="#7f1d1d" stroke-width="1.5"/>
-          <circle cx="72" cy="106" r="8" fill="#991b1b" opacity=".7" stroke="#7f1d1d" stroke-width="1"/>
-          <circle cx="56" cy="115" r="7" fill="#991b1b" opacity=".7" stroke="#7f1d1d" stroke-width="1"/>
-          <text x="64" y="113" text-anchor="middle" fill="#fbbf24" font-size="7" font-weight="700">CLOT</text>
-        </g>
+        <circle cx="50" cy="88" r="10" fill="#dc2626" opacity=".8"/>
+        <circle cx="75" cy="96" r="9" fill="#dc2626" opacity=".75"/>
+        <circle cx="58" cy="122" r="9" fill="#dc2626" opacity=".72"/>
+        <circle cx="84" cy="130" r="10" fill="#dc2626" opacity=".8"/>
+        <circle cx="50" cy="150" r="8" fill="#dc2626" opacity=".7"/>
+        <circle cx="78" cy="160" r="9" fill="#dc2626" opacity=".78"/>
       </g>
-      <text x="70" y="200" text-anchor="middle" fill="#f87171" font-size="9" id="flowLabel">Flow: Slow / Clot forming</text>
-      <!-- Divider -->
-      <line x1="130" y1="35" x2="130" y2="260" stroke="#2a2f42" stroke-width="1" stroke-dasharray="4,4"/>
-      <!-- RIGHT: Cut/wound with bleeding -->
-      <text x="195" y="38" text-anchor="middle" fill="#8b90a5" font-size="8">WOUND / CUT</text>
-      <!-- Skin surface -->
+      <g id="clotCluster">
+        <circle cx="65" cy="120" r="18" fill="#f59e0b" opacity=".85"/>
+        <circle cx="78" cy="116" r="10" fill="#fbbf24" opacity=".75"/>
+        <circle cx="58" cy="130" r="9" fill="#fbbf24" opacity=".75"/>
+      </g>
+      <text x="65" y="194" text-anchor="middle" fill="#f87171" font-size="8" id="flowLabel">Flow: clot blocks blood</text>
+      <line x1="130" y1="32" x2="130" y2="200" stroke="#2a2f42" stroke-width="1" stroke-dasharray="4,4"/>
+      <text x="195" y="42" text-anchor="middle" fill="#8b90a5" font-size="8">WOUND / CUT</text>
       <rect x="155" y="60" width="80" height="80" rx="8" fill="#2a1a18" stroke="#fb923c" stroke-width="1.5" opacity=".5"/>
       <text x="195" y="78" text-anchor="middle" fill="#fb923c" font-size="8">SKIN</text>
-      <!-- Cut line -->
       <line x1="175" y1="90" x2="215" y2="90" stroke="#f87171" stroke-width="2"/>
-      <!-- Blood drops from wound (small before = clotting works) -->
       <g id="woundBleed">
         <circle cx="185" cy="100" r="4" fill="#dc2626" opacity=".7"/>
         <circle cx="195" cy="105" r="3" fill="#dc2626" opacity=".6"/>
         <circle cx="205" cy="102" r="3.5" fill="#dc2626" opacity=".6"/>
       </g>
       <text x="195" y="155" text-anchor="middle" fill="#8b90a5" font-size="8" id="bleedLabel">Bleeding: Normal clotting</text>
-      <!-- Bottom labels -->
       <text x="130" y="230" text-anchor="middle" fill="#f472b6" font-size="10" id="statusText">Before anticoagulant</text>
       <text x="130" y="248" text-anchor="middle" fill="#8b90a5" font-size="9" id="riskText">Clot risk: HIGH</text>
-      <!-- Warning -->
       <rect x="20" y="260" width="220" height="30" rx="8" fill="#f4727615" stroke="#f87171" stroke-width="1" opacity=".6"/>
       <text x="130" y="280" text-anchor="middle" fill="#f87171" font-size="8" id="warnBleed">⚠ Watch for: unusual bleeding, bruising, dark stools</text>
     </svg>`,
     cholesterol:`<svg viewBox="0 0 240 280" width="240" id="bodyDiagramSVG">
       <text x="120" y="16" text-anchor="middle" fill="#34d399" font-size="10" font-weight="600">BLOOD VESSEL &amp; CHOLESTEROL</text>
-      <!-- Large blood vessel cross section -->
       <text x="120" y="36" text-anchor="middle" fill="#8b90a5" font-size="8">Cross-section of artery</text>
-      <!-- Outer vessel wall -->
       <ellipse cx="120" cy="130" rx="80" ry="80" fill="#1a1020" stroke="#4f8cff" stroke-width="2" opacity=".5"/>
-      <!-- Inner vessel (lumen) - smaller due to fat -->
       <ellipse cx="120" cy="130" rx="42" ry="42" fill="#1a0a0a" stroke="#f87171" stroke-width="1" opacity=".4" id="lumen"/>
-      <!-- Fat/plaque deposits around the lumen -->
       <g id="fatDeposits">
-        <ellipse cx="75" cy="110" rx="22" ry="16" fill="#fbbf24" opacity=".6" rx="8"/>
+        <ellipse cx="75" cy="110" rx="22" ry="16" fill="#fbbf24" opacity=".6"/>
         <ellipse cx="155" cy="100" rx="18" ry="20" fill="#fbbf24" opacity=".55"/>
         <ellipse cx="90" cy="160" rx="20" ry="14" fill="#fb923c" opacity=".5"/>
         <ellipse cx="150" cy="155" rx="16" ry="18" fill="#fbbf24" opacity=".5"/>
@@ -1419,31 +1401,169 @@ function renderBodyDiagram(cls,el){
         <ellipse cx="110" cy="80" rx="18" ry="10" fill="#fb923c" opacity=".5"/>
         <ellipse cx="130" cy="175" rx="15" ry="10" fill="#fbbf24" opacity=".5"/>
       </g>
-      <!-- Labels on fat -->
       <text x="80" y="114" text-anchor="middle" fill="#7f1d1d" font-size="7" font-weight="600">FAT</text>
       <text x="152" y="104" text-anchor="middle" fill="#7f1d1d" font-size="7" font-weight="600">FAT</text>
       <text x="92" y="162" text-anchor="middle" fill="#7f1d1d" font-size="6" font-weight="600">FAT</text>
-      <!-- Blood flow through narrow center -->
       <g id="bloodCells">
         <circle cx="115" cy="115" r="4" fill="#dc2626" opacity=".7"/>
         <circle cx="125" cy="125" r="3.5" fill="#dc2626" opacity=".65"/>
         <circle cx="118" cy="138" r="4" fill="#dc2626" opacity=".7"/>
         <circle cx="128" cy="145" r="3" fill="#dc2626" opacity=".6"/>
       </g>
-      <!-- Flow indicator -->
       <text x="120" y="130" text-anchor="middle" fill="#f87171" font-size="8" font-weight="600" id="flowText">Narrow!</text>
-      <!-- Cholesterol level bar -->
       <rect x="30" y="224" width="180" height="12" rx="6" fill="#2a2f42" stroke="#3a3f52" stroke-width="1"/>
       <rect x="30" y="224" width="150" height="12" rx="6" fill="#f87171" opacity=".7" id="cholBar"/>
       <text x="120" y="222" text-anchor="middle" fill="#fbbf24" font-size="9" id="cholLabel">Total Cholesterol: 280 mg/dL</text>
       <text x="120" y="252" text-anchor="middle" fill="#f87171" font-size="10" font-weight="600" id="statusText">HIGH cholesterol — vessel narrowed</text>
       <text x="120" y="268" text-anchor="middle" fill="#8b90a5" font-size="8" id="riskLabel">Heart attack &amp; stroke risk: Elevated</text>
     </svg>`,
+    inflammation:`<svg viewBox="0 0 260 280" width="260" id="bodyDiagramSVG">
+      <text x="130" y="18" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="600">INFLAMMATION / SWELLING</text>
+      <text x="130" y="34" text-anchor="middle" fill="#8b90a5" font-size="8">Inflamed airway or tissue before corticosteroid treatment</text>
+      <ellipse cx="130" cy="120" rx="85" ry="70" fill="#2f1414" stroke="#f87171" stroke-width="2" opacity=".55"/>
+      <ellipse id="inflamCore" cx="130" cy="120" rx="38" ry="52" fill="#7c2d12" stroke="#fb923c" stroke-width="6" opacity=".9"/>
+      <g id="inflamBursts">
+        <circle cx="72" cy="92" r="6" fill="#f87171" opacity=".85"/>
+        <circle cx="186" cy="95" r="7" fill="#f87171" opacity=".82"/>
+        <circle cx="82" cy="148" r="5" fill="#fb923c" opacity=".8"/>
+        <circle cx="180" cy="150" r="6" fill="#fb923c" opacity=".78"/>
+        <circle cx="130" cy="62" r="7" fill="#fbbf24" opacity=".7"/>
+      </g>
+      <text x="130" y="124" text-anchor="middle" fill="#fff7ed" font-size="10" font-weight="700" id="inflamText">SWOLLEN</text>
+      <text x="130" y="225" text-anchor="middle" fill="#f87171" font-size="10" id="statusText">Before: inflammation and swelling are high</text>
+      <text x="130" y="244" text-anchor="middle" fill="#94a3b8" font-size="8">Steroids calm the immune response and reduce swelling</text>
+    </svg>`,
+    pain:`<svg viewBox="0 0 260 280" width="260" id="bodyDiagramSVG">
+      <text x="130" y="18" text-anchor="middle" fill="#ffb347" font-size="10" font-weight="600">PAIN SIGNALS</text>
+      <text x="130" y="34" text-anchor="middle" fill="#8b90a5" font-size="8">Pain and fever pathway</text>
+      <circle cx="82" cy="120" r="46" fill="#201616" stroke="#fb923c" stroke-width="2" opacity=".55"/>
+      <circle id="painHotspot" cx="82" cy="120" r="22" fill="#f87171" opacity=".8"/>
+      <text x="82" y="124" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">PAIN</text>
+      <path id="painPath" d="M128 120 C150 102 172 98 198 92" stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="6,5"/>
+      <g id="brainIcon">
+        <path d="M180 70 C160 68 152 86 158 98 C148 102 146 118 156 126 C154 140 164 150 178 146 C188 154 206 152 212 138 C226 138 234 124 230 112 C238 100 232 84 218 80 C212 66 194 64 184 74" fill="#1f2937" stroke="#a78bfa" stroke-width="2" opacity=".9"/>
+        <text x="194" y="114" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="700">BRAIN</text>
+      </g>
+      <text x="130" y="226" text-anchor="middle" fill="#f87171" font-size="10" id="statusText">Before: pain signals are firing</text>
+      <text x="130" y="246" text-anchor="middle" fill="#94a3b8" font-size="8" id="painNote">Analgesics reduce pain; some also reduce inflammation or fever</text>
+    </svg>`,
+    infection:`<svg viewBox="0 0 260 280" width="260" id="bodyDiagramSVG">
+      <text x="130" y="18" text-anchor="middle" fill="#b78cff" font-size="10" font-weight="600">BACTERIAL INFECTION</text>
+      <text x="130" y="34" text-anchor="middle" fill="#8b90a5" font-size="8">Bacteria present before antibiotic treatment</text>
+      <rect x="36" y="58" width="188" height="138" rx="18" fill="#151b2e" stroke="#b78cff" stroke-width="1.5" opacity=".55"/>
+      <g id="bacteriaGroup">
+        <ellipse cx="74" cy="96" rx="16" ry="10" fill="#c084fc" opacity=".9"/>
+        <ellipse cx="122" cy="90" rx="15" ry="9" fill="#a78bfa" opacity=".85"/>
+        <ellipse cx="170" cy="104" rx="18" ry="11" fill="#c084fc" opacity=".9"/>
+        <ellipse cx="88" cy="148" rx="17" ry="10" fill="#a78bfa" opacity=".88"/>
+        <ellipse cx="144" cy="146" rx="16" ry="10" fill="#c084fc" opacity=".9"/>
+        <ellipse cx="186" cy="150" rx="15" ry="9" fill="#a78bfa" opacity=".84"/>
+      </g>
+      <g id="immuneAlert">
+        <circle cx="60" cy="178" r="6" fill="#f87171" opacity=".75"/>
+        <circle cx="96" cy="180" r="5" fill="#f87171" opacity=".7"/>
+        <circle cx="132" cy="176" r="6" fill="#f87171" opacity=".74"/>
+      </g>
+      <text x="130" y="225" text-anchor="middle" fill="#f87171" font-size="10" id="statusText">Before: bacteria are multiplying</text>
+      <text x="130" y="244" text-anchor="middle" fill="#94a3b8" font-size="8" id="infectNote">Antibiotics stop growth or kill bacteria so the infection clears</text>
+    </svg>`,
+    stomach:`<svg viewBox="0 0 260 280" width="260" id="bodyDiagramSVG">
+      <text x="130" y="18" text-anchor="middle" fill="#8b5cf6" font-size="10" font-weight="600">GI / STOMACH ACID</text>
+      <text x="130" y="34" text-anchor="middle" fill="#8b90a5" font-size="8">Too much acid irritates the stomach and esophagus</text>
+      <path d="M154 62 C164 64 178 78 180 96 C182 122 170 136 154 146 C144 152 140 164 140 182 C140 206 122 222 98 222 C74 222 58 208 58 186 C58 168 68 154 84 144 C98 136 102 126 102 112 C102 96 94 80 84 70" fill="#241a2a" stroke="#a78bfa" stroke-width="2" opacity=".92"/>
+      <path id="acidPool" d="M82 170 Q98 160 120 168 Q140 176 146 194 Q132 208 110 208 Q90 208 78 194 Q76 184 82 170Z" fill="#f87171" opacity=".82"/>
+      <g id="acidDrops">
+        <circle cx="104" cy="146" r="6" fill="#fbbf24" opacity=".9"/>
+        <circle cx="124" cy="154" r="5" fill="#fb923c" opacity=".88"/>
+        <circle cx="90" cy="158" r="5" fill="#fbbf24" opacity=".86"/>
+        <circle cx="136" cy="172" r="4" fill="#fb923c" opacity=".84"/>
+      </g>
+      <text x="118" y="188" text-anchor="middle" fill="#fff7ed" font-size="10" font-weight="700" id="acidLabel">HIGH ACID</text>
+      <text x="130" y="238" text-anchor="middle" fill="#f87171" font-size="10" id="statusText">Before: acid is irritating the GI tract</text>
+      <text x="130" y="256" text-anchor="middle" fill="#94a3b8" font-size="8" id="stomachNote">PPIs and H2 blockers reduce acid; antiemetics reduce nausea signals</text>
+    </svg>`,
+    brain:`<svg viewBox="0 0 320 320" width="285" id="bodyDiagramSVG">
+      <defs>
+        <linearGradient id="brainFill" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#312e81"/>
+          <stop offset="100%" stop-color="#111827"/>
+        </linearGradient>
+        <marker id="arrowHead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <polygon points="0 0, 6 3, 0 6" fill="#f87171"/>
+        </marker>
+      </defs>
+      <text x="160" y="18" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="600">BRAIN EFFECTS</text>
+      <text x="160" y="34" text-anchor="middle" fill="#8b90a5" font-size="8">Mood drugs change transmitters; antiseizure drugs manage abnormal waves</text>
+
+      <!-- more brain-like shape -->
+      <g id="brainShell">
+        <path d="M110 64 C88 66 72 78 66 96 C50 102 42 120 46 140 C42 160 50 176 64 186 C68 204 84 220 104 224 C114 238 132 246 150 242 C164 248 182 248 196 242 C214 246 232 238 242 224 C262 220 278 204 282 186 C296 176 304 160 300 140 C304 120 296 102 280 96 C274 78 258 66 236 64 C224 52 206 46 188 48 C170 42 150 42 132 48 C114 46 96 52 84 64 C94 60 100 58 110 64 Z" fill="url(#brainFill)" stroke="#a78bfa" stroke-width="2.2" opacity=".97"/>
+        <path d="M160 56 C154 74 154 94 160 114 C154 132 154 152 160 170 C156 188 156 206 160 228" stroke="#c4b5fd" stroke-width="2" opacity=".85" fill="none"/>
+        <path d="M92 88 C110 92 120 104 118 118 C132 126 136 138 130 152 C144 162 146 176 138 190" stroke="#c4b5fd" stroke-width="2" fill="none" opacity=".88"/>
+        <path d="M126 78 C144 88 150 98 146 112 C156 122 160 136 154 150 C162 162 164 176 158 190" stroke="#c4b5fd" stroke-width="2" fill="none" opacity=".8"/>
+        <path d="M194 78 C176 88 170 98 174 112 C164 122 160 136 166 150 C158 162 156 176 162 190" stroke="#c4b5fd" stroke-width="2" fill="none" opacity=".8"/>
+        <path d="M228 88 C210 92 200 104 202 118 C188 126 184 138 190 152 C176 162 174 176 182 190" stroke="#c4b5fd" stroke-width="2" fill="none" opacity=".88"/>
+      </g>
+
+      <g id="brainBursts">
+        <circle cx="102" cy="84" r="6" fill="#f87171" opacity=".82"/>
+        <circle cx="220" cy="88" r="6" fill="#fbbf24" opacity=".78"/>
+        <circle cx="162" cy="200" r="6" fill="#f87171" opacity=".82"/>
+      </g>
+
+      <!-- smiley faces INSIDE the brain, only for SSRI/SNRI -->
+      <g id="moodFaces" opacity="0.06">
+        <circle cx="118" cy="126" r="16" fill="#fde68a" opacity=".95"/>
+        <circle cx="160" cy="108" r="16" fill="#fbbf24" opacity=".95"/>
+        <circle cx="204" cy="126" r="16" fill="#fde68a" opacity=".95"/>
+        <text x="118" y="131" text-anchor="middle" font-size="14" fill="#111827">☺</text>
+        <text x="160" y="113" text-anchor="middle" font-size="14" fill="#111827">☺</text>
+        <text x="204" y="131" text-anchor="middle" font-size="14" fill="#111827">☺</text>
+      </g>
+
+      <!-- wave area inside brain for antiseizure -->
+      <g id="fastWaves" opacity=".7">
+        <path d="M96 172 Q106 156 116 172 T136 172 T156 172 T176 172 T196 172 T216 172" stroke="#fb7185" stroke-width="3" fill="none"/>
+        <path d="M96 188 Q104 168 112 188 T128 188 T144 188 T160 188 T176 188 T192 188 T208 188 T224 188" stroke="#fbbf24" stroke-width="2.6" fill="none"/>
+      </g>
+      <g id="calmWaves" opacity="0.08">
+        <path d="M96 180 Q118 170 140 180 T184 180 T228 180" stroke="#34d399" stroke-width="3.2" fill="none"/>
+        <path d="M96 194 Q118 186 140 194 T184 194 T228 194" stroke="#6ee7b7" stroke-width="2.5" fill="none"/>
+      </g>
+
+      <text x="160" y="128" text-anchor="middle" fill="#e9d5ff" font-size="10" font-weight="700" id="brainLabel">LOW BALANCE / OVERACTIVITY</text>
+
+      <!-- synapse teaching area -->
+      <text x="160" y="244" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="700">NEURON SYNAPSE</text>
+      <line x1="104" y1="260" x2="138" y2="260" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
+      <line x1="182" y1="260" x2="216" y2="260" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
+      <text x="120" y="252" text-anchor="middle" fill="#8b90a5" font-size="7">sending</text>
+      <text x="198" y="252" text-anchor="middle" fill="#8b90a5" font-size="7">receiving</text>
+      <line x1="160" y1="254" x2="160" y2="266" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2,2"/>
+      <text x="160" y="276" text-anchor="middle" fill="#8b90a5" font-size="7">reuptake zone</text>
+      <path d="M176 284 Q188 292 202 286" stroke="#f87171" stroke-width="2" fill="none" marker-end="url(#arrowHead)" id="reuptakeArrow"/>
+      <line x1="186" y1="278" x2="206" y2="294" stroke="#ef4444" stroke-width="2.5" id="reuptakeBlock" opacity=".35"/>
+      <line x1="206" y1="278" x2="186" y2="294" stroke="#ef4444" stroke-width="2.5" id="reuptakeBlock2" opacity=".35"/>
+      <text x="236" y="290" fill="#f87171" font-size="7" id="reuptakeText">reuptake</text>
+      <text x="160" y="292" text-anchor="middle" fill="#fbbf24" font-size="8" id="serotoninText">Serotonin: low</text>
+      <text x="160" y="304" text-anchor="middle" fill="#94a3b8" font-size="7" id="neuroText">Balanced signaling not yet reached</text>
+
+      <!-- eye / sympathetic effect for SNRI -->
+      <g id="eyeGroup" transform="translate(18,266)">
+        <text x="28" y="0" fill="#8b90a5" font-size="7">pupil</text>
+        <ellipse cx="28" cy="18" rx="18" ry="10" fill="#e5e7eb" opacity=".9"/>
+        <circle id="pupil" cx="28" cy="18" r="4" fill="#111827"/>
+      </g>
+      <text x="296" y="274" text-anchor="end" fill="#8b90a5" font-size="7" id="sympatheticText">Sympathetic tone: baseline</text>
+      <text x="296" y="286" text-anchor="end" fill="#8b90a5" font-size="7" id="senseText">Alertness / senses: baseline</text>
+
+      <text x="160" y="314" text-anchor="middle" fill="#f87171" font-size="10" id="statusText">Before: symptoms are not well controlled</text>
+      <text x="160" y="327" text-anchor="middle" fill="#94a3b8" font-size="8" id="brainNote">These medications change serotonin, norepinephrine, GABA, or abnormal brain-wave activity</text>
+    </svg>`
   };
 
   const svgKey = effect.type;
-  const svg = svgMap[svgKey] || svgMap.heart;
-  let isApplied = false;
+  const svg = svgMap[svgKey] || svgMap.vessels;
 
   el.innerHTML=`
     <div class="content-card ${medThemeClass(cls)}">
@@ -1475,7 +1595,6 @@ function toggleBodyEffect(){
   const indicators=document.getElementById('bodyIndicators');
 
   if(!applied){
-    // Apply effect
     btn.classList.add('active-effect');
     btn.textContent='🔄 Reset';
     window._bodyEffectApplied=true;
@@ -1490,7 +1609,6 @@ function toggleBodyEffect(){
       if(bp){bp.textContent='BP: 122/78';bp.setAttribute('fill','#34d399');}
       if(st){st.textContent='After beta blocker';st.setAttribute('fill','#34d399');}
       if(beat)beat.setAttribute('dur','1.2s');
-      // Airways narrow (nonselective warning)
       const bL=document.getElementById('bronchL'),bR=document.getElementById('bronchR');
       if(bL){bL.setAttribute('stroke-width','10');bL.setAttribute('stroke','#f87171');}
       if(bR){bR.setAttribute('stroke-width','10');bR.setAttribute('stroke','#f87171');}
@@ -1529,25 +1647,24 @@ function toggleBodyEffect(){
     }
     else if(type==='glucose'){
       const dots=document.getElementById('glucoseDots');
-      if(dots)dots.style.opacity='0.2';
+      if(dots)dots.style.opacity='0.18';
       const gt=document.getElementById('glucoseText'),st=document.getElementById('statusText');
       if(gt){gt.textContent='Glucose: 110 mg/dL';gt.setAttribute('fill','#34d399');}
-      if(st){st.textContent='Blood sugar controlled';st.setAttribute('fill','#34d399');}
-      indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Blood Glucose</span><span class="val" style="color:var(--green)">110 mg/dL ↓</span></div>';
+      if(st){st.textContent='Glucose moves into cells; blood sugar controlled';st.setAttribute('fill','#34d399');}
+      indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Blood Glucose</span><span class="val" style="color:var(--green)">110 mg/dL ↓</span></div><div class="indicator"><span style="color:var(--green)">Cells</span><span class="val" style="color:var(--green)">Energy received ✓</span></div>';
     }
     else if(type==='airway'){
-      ['airwayL','airwayR'].forEach(id=>{const a=document.getElementById(id);if(a){a.setAttribute('stroke','#34d399');a.setAttribute('stroke-width','3');}});
+      ['airwayL','airwayR'].forEach(id=>{const a=document.getElementById(id);if(a){a.setAttribute('rx','28');a.setAttribute('ry','50');a.setAttribute('stroke','#34d399');a.setAttribute('stroke-width','3');}});
       const n1=document.getElementById('narrow1'),n2=document.getElementById('narrow2');
-      if(n1)n1.style.display='none';if(n2)n2.style.display='none';
+      if(n1)n1.style.display='none';
+      if(n2)n2.style.display='none';
       const st=document.getElementById('statusText');
       if(st){st.textContent='Airways opened';st.setAttribute('fill','#34d399');}
       indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Airways</span><span class="val" style="color:var(--green)">Open ✓</span></div><div class="indicator"><span style="color:var(--green)">Breathing</span><span class="val" style="color:var(--green)">Easier ↑</span></div>';
     }
     else if(type==='blood'){
-      // Clot dissolves, blood flows smoother
       const clot=document.getElementById('clotCluster');
       if(clot)clot.style.opacity='0';
-      // Blood cells become smaller/more spaced = thinner
       const bf=document.getElementById('bloodFlow');
       if(bf){
         bf.querySelectorAll('circle').forEach(c=>{
@@ -1559,7 +1676,6 @@ function toggleBodyEffect(){
       }
       const fl=document.getElementById('flowLabel');
       if(fl){fl.textContent='Flow: Smooth / No clot';fl.setAttribute('fill','#34d399');}
-      // Wound bleeds more
       const wb=document.getElementById('woundBleed');
       if(wb){
         wb.innerHTML=`
@@ -1582,7 +1698,6 @@ function toggleBodyEffect(){
       indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Blood</span><span class="val" style="color:var(--green)">Thinner ✓</span></div><div class="indicator"><span style="color:var(--green)">Clot Risk</span><span class="val" style="color:var(--green)">Reduced ↓</span></div><div class="indicator"><span style="color:var(--red)">Bleeding</span><span class="val" style="color:var(--red)">Increased ⚠</span></div><div class="indicator"><span style="color:var(--red)">Fall Risk</span><span class="val" style="color:var(--red)">Danger ⚠</span></div>';
     }
     else if(type==='cholesterol'){
-      // Fat deposits shrink
       const fd=document.getElementById('fatDeposits');
       if(fd){
         fd.querySelectorAll('ellipse').forEach(e=>{
@@ -1593,17 +1708,11 @@ function toggleBodyEffect(){
           e.setAttribute('opacity','0.2');
         });
       }
-      // Lumen opens up
       const lumen=document.getElementById('lumen');
       if(lumen){lumen.setAttribute('rx','65');lumen.setAttribute('ry','65');lumen.setAttribute('stroke','#34d399');}
-      // Fat labels fade
-      document.querySelectorAll('#bodyDiagramSVG text').forEach(t=>{
-        if(t.textContent==='FAT')t.setAttribute('opacity','0.1');
-      });
-      // Flow text
+      document.querySelectorAll('#bodyDiagramSVG text').forEach(t=>{ if(t.textContent==='FAT')t.setAttribute('opacity','0.1'); });
       const ft=document.getElementById('flowText');
       if(ft){ft.textContent='Open!';ft.setAttribute('fill','#34d399');}
-      // Cholesterol bar shrinks
       const cb=document.getElementById('cholBar');
       if(cb){cb.setAttribute('width','55');cb.setAttribute('fill','#34d399');}
       const cl=document.getElementById('cholLabel');
@@ -1614,16 +1723,156 @@ function toggleBodyEffect(){
       if(rl){rl.textContent='Heart attack & stroke risk: Lowered';rl.setAttribute('fill','#34d399');}
       indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Cholesterol</span><span class="val" style="color:var(--green)">180 mg/dL ↓</span></div><div class="indicator"><span style="color:var(--green)">Vessel</span><span class="val" style="color:var(--green)">Opened ✓</span></div><div class="indicator"><span style="color:var(--green)">Fat Deposits</span><span class="val" style="color:var(--green)">Reduced ↓</span></div>';
     }
+    else if(type==='inflammation'){
+      const core=document.getElementById('inflamCore');
+      const bursts=document.getElementById('inflamBursts');
+      const it=document.getElementById('inflamText');
+      const st=document.getElementById('statusText');
+      if(core){core.setAttribute('rx','52');core.setAttribute('ry','44');core.setAttribute('fill','#134e4a');core.setAttribute('stroke','#34d399');}
+      if(bursts)bursts.style.opacity='0.18';
+      if(it){it.textContent='CALMER';it.setAttribute('fill','#ecfeff');}
+      if(st){st.textContent='After corticosteroid: swelling reduced';st.setAttribute('fill','#34d399');}
+      indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Inflammation</span><span class="val" style="color:var(--green)">Reduced ↓</span></div><div class="indicator"><span style="color:var(--green)">Swelling</span><span class="val" style="color:var(--green)">Less ✓</span></div><div class="indicator"><span style="color:var(--green)">Symptoms</span><span class="val" style="color:var(--green)">Improved ✓</span></div>';
+    }
+    else if(type==='pain'){
+      const hotspot=document.getElementById('painHotspot');
+      const path=document.getElementById('painPath');
+      const st=document.getElementById('statusText');
+      const note=document.getElementById('painNote');
+      if(hotspot){hotspot.setAttribute('r','10');hotspot.setAttribute('fill','#34d399');hotspot.setAttribute('opacity','.72');}
+      if(path){path.setAttribute('stroke','#34d399');path.setAttribute('stroke-width','2');path.setAttribute('stroke-dasharray','2,8');}
+      if(st){st.textContent='After medication: pain is reduced';st.setAttribute('fill','#34d399');}
+      if(note){note.textContent='NSAIDs also reduce inflammation; acetaminophen reduces pain/fever; opioids strongly reduce pain but can slow breathing.';note.setAttribute('fill','#cbd5e1');}
+      indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Pain</span><span class="val" style="color:var(--green)">Lower ↓</span></div><div class="indicator"><span style="color:var(--green)">Comfort</span><span class="val" style="color:var(--green)">Better ✓</span></div><div class="indicator"><span style="color:var(--orange)">Watch</span><span class="val" style="color:var(--orange)">Sedation / GI risk</span></div>';
+    }
+    else if(type==='infection'){
+      const group=document.getElementById('bacteriaGroup');
+      const alert=document.getElementById('immuneAlert');
+      const st=document.getElementById('statusText');
+      const note=document.getElementById('infectNote');
+      if(group){group.querySelectorAll('ellipse').forEach(e=>{e.setAttribute('rx','6');e.setAttribute('ry','4');e.setAttribute('opacity','.2');});}
+      if(alert)alert.style.opacity='0.18';
+      if(st){st.textContent='After antibiotic: bacteria decrease';st.setAttribute('fill','#34d399');}
+      if(note){note.textContent='Correct antibiotic therapy clears the infection over time. Finish the full course unless told otherwise.';note.setAttribute('fill','#cbd5e1');}
+      indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Bacteria</span><span class="val" style="color:var(--green)">Reduced ↓</span></div><div class="indicator"><span style="color:var(--green)">Infection</span><span class="val" style="color:var(--green)">Improving ✓</span></div><div class="indicator"><span style="color:var(--purple)">Teaching</span><span class="val" style="color:var(--purple)">Finish course</span></div>';
+    }
+    else if(type==='stomach'){
+      const pool=document.getElementById('acidPool');
+      const drops=document.getElementById('acidDrops');
+      const label=document.getElementById('acidLabel');
+      const st=document.getElementById('statusText');
+      const note=document.getElementById('stomachNote');
+      if(pool){pool.setAttribute('fill','#34d399');pool.setAttribute('opacity','.35');}
+      if(drops)drops.style.opacity='0.12';
+      if(label){label.textContent='LESS ACID';label.setAttribute('fill','#dcfce7');}
+      if(st){st.textContent='After GI medication: irritation decreases';st.setAttribute('fill','#34d399');}
+      if(note){note.textContent='PPIs and H2 blockers reduce acid. Antiemetics act on nausea/vomiting pathways to calm symptoms.';note.setAttribute('fill','#cbd5e1');}
+      indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Acid</span><span class="val" style="color:var(--green)">Reduced ↓</span></div><div class="indicator"><span style="color:var(--green)">Burning / Reflux</span><span class="val" style="color:var(--green)">Less ✓</span></div><div class="indicator"><span style="color:var(--green)">Comfort</span><span class="val" style="color:var(--green)">Better ✓</span></div>';
+    }
+    else if(type==='brain'){
+      const bursts=document.getElementById('brainBursts');
+      const moodFaces=document.getElementById('moodFaces');
+      const fastWaves=document.getElementById('fastWaves');
+      const calmWaves=document.getElementById('calmWaves');
+      const label=document.getElementById('brainLabel');
+      const st=document.getElementById('statusText');
+      const note=document.getElementById('brainNote');
+      const serotonin=document.getElementById('serotoninText');
+      const neuro=document.getElementById('neuroText');
+      const reArrow=document.getElementById('reuptakeArrow');
+      const reBlock=document.getElementById('reuptakeBlock');
+      const reBlock2=document.getElementById('reuptakeBlock2');
+      const reText=document.getElementById('reuptakeText');
+      const pupil=document.getElementById('pupil');
+      const sym=document.getElementById('sympatheticText');
+      const sense=document.getElementById('senseText');
+      const clsName=(currentModule.classes[currentClassIdx].name||'').toLowerCase();
+      if(bursts)bursts.style.opacity='0.16';
+      if(moodFaces)moodFaces.setAttribute('opacity','0.04');
+      if(fastWaves)fastWaves.setAttribute('opacity','.35');
+      if(calmWaves)calmWaves.setAttribute('opacity','0.08');
+
+      if(clsName.includes('ssri')){
+        if(label){label.textContent='SEROTONIN UP';label.setAttribute('fill','#fde68a');}
+        if(moodFaces)moodFaces.setAttribute('opacity','1');
+        if(fastWaves)fastWaves.setAttribute('opacity','0.08');
+        if(calmWaves)calmWaves.setAttribute('opacity','0.16');
+        if(serotonin){serotonin.textContent='Serotonin: increased';serotonin.setAttribute('fill','#fde68a');}
+        if(neuro){neuro.textContent='Reuptake is blocked; more serotonin stays in the synapse';neuro.setAttribute('fill','#cbd5e1');}
+        if(reArrow)reArrow.setAttribute('opacity','0.22');
+        if(reBlock){reBlock.setAttribute('stroke','#34d399');reBlock.setAttribute('opacity','1');}
+        if(reBlock2){reBlock2.setAttribute('stroke','#34d399');reBlock2.setAttribute('opacity','1');}
+        if(reText){reText.textContent='reuptake blocked';reText.setAttribute('fill','#34d399');}
+        if(pupil){pupil.setAttribute('r','4');}
+        if(sym){sym.textContent='Sympathetic tone: not the main effect';sym.setAttribute('fill','#8b90a5');}
+        if(sense){sense.textContent='Mood / calm / anxiety control improves over weeks';sense.setAttribute('fill','#34d399');}
+        if(st){st.textContent='After SSRI: serotonin level increases';st.setAttribute('fill','#34d399');}
+        if(note){note.textContent='SSRIs block serotonin reuptake; more serotonin stays available, so the brain gradually shifts toward a steadier, happier mood.';note.setAttribute('fill','#cbd5e1');}
+        indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Serotonin</span><span class="val" style="color:var(--green)">Increased ↑</span></div><div class="indicator"><span style="color:var(--green)">Mood</span><span class="val" style="color:var(--green)">Happier / steadier</span></div><div class="indicator"><span style="color:var(--green)">Reuptake</span><span class="val" style="color:var(--green)">Blocked ✓</span></div>';
+      }
+      else if(clsName.includes('snri')){
+        if(label){label.textContent='5-HT + NE UP';label.setAttribute('fill','#fde68a');}
+        if(moodFaces)moodFaces.setAttribute('opacity','1');
+        if(fastWaves)fastWaves.setAttribute('opacity','0.08');
+        if(calmWaves)calmWaves.setAttribute('opacity','0.16');
+        if(serotonin){serotonin.textContent='Serotonin + norepinephrine: increased';serotonin.setAttribute('fill','#fde68a');}
+        if(neuro){neuro.textContent='Serotonin and norepinephrine both stay higher in the synapse';neuro.setAttribute('fill','#cbd5e1');}
+        if(reArrow)reArrow.setAttribute('opacity','0.22');
+        if(reBlock){reBlock.setAttribute('stroke','#34d399');reBlock.setAttribute('opacity','1');}
+        if(reBlock2){reBlock2.setAttribute('stroke','#34d399');reBlock2.setAttribute('opacity','1');}
+        if(reText){reText.textContent='reuptake blocked';reText.setAttribute('fill','#34d399');}
+        if(pupil){pupil.setAttribute('r','6.8');}
+        if(sym){sym.textContent='Sympathetic tone: higher from norepinephrine';sym.setAttribute('fill','#fbbf24');}
+        if(sense){sense.textContent='Alertness / senses: heightened';sense.setAttribute('fill','#fbbf24');}
+        if(st){st.textContent='After SNRI: serotonin and norepinephrine increase';st.setAttribute('fill','#34d399');}
+        if(note){note.textContent='SNRIs block reuptake of serotonin and norepinephrine; mood improves, while norepinephrine can heighten alertness and widen pupils.';note.setAttribute('fill','#cbd5e1');}
+        indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Serotonin</span><span class="val" style="color:var(--green)">Increased ↑</span></div><div class="indicator"><span style="color:var(--purple)">Norepinephrine</span><span class="val" style="color:var(--purple)">Increased ↑</span></div><div class="indicator"><span style="color:var(--orange)">Pupil</span><span class="val" style="color:var(--orange)">Wider ◉</span></div><div class="indicator"><span style="color:var(--orange)">Sympathetic</span><span class="val" style="color:var(--orange)">Heightened ⚡</span></div>';
+      }
+      else if(clsName.includes('benzodiazep')){
+        if(label){label.textContent='CALMER';label.setAttribute('fill','#dcfce7');}
+        if(moodFaces)moodFaces.setAttribute('opacity','0');
+        if(fastWaves)fastWaves.setAttribute('opacity','0.1');
+        if(calmWaves)calmWaves.setAttribute('opacity','.85');
+        if(serotonin){serotonin.textContent='GABA calming effect increased';serotonin.setAttribute('fill','#34d399');}
+        if(neuro){neuro.textContent='Brain firing slows; anxiety and agitation decrease';neuro.setAttribute('fill','#cbd5e1');}
+        if(reArrow)reArrow.setAttribute('opacity','0');
+        if(reBlock)reBlock.setAttribute('opacity','0');
+        if(reBlock2)reBlock2.setAttribute('opacity','0');
+        if(reText){reText.textContent='';}
+        if(pupil){pupil.setAttribute('r','4');}
+        if(sym){sym.textContent='Sympathetic tone: reduced';sym.setAttribute('fill','#34d399');}
+        if(sense){sense.textContent='Sedation / slower responses';sense.setAttribute('fill','#fbbf24');}
+        if(st){st.textContent='After benzodiazepine: anxiety reduced';st.setAttribute('fill','#34d399');}
+        if(note){note.textContent='Benzodiazepines enhance GABA activity, calming the brain and causing sedation.';note.setAttribute('fill','#cbd5e1');}
+        indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Anxiety</span><span class="val" style="color:var(--green)">Reduced ↓</span></div><div class="indicator"><span style="color:var(--orange)">Sedation</span><span class="val" style="color:var(--orange)">Increased ⚠</span></div><div class="indicator"><span style="color:var(--red)">Falls</span><span class="val" style="color:var(--red)">Risk ↑</span></div>';
+      }
+      else {
+        if(label){label.textContent='SEIZURE WAVES MANAGED';label.setAttribute('fill','#86efac');}
+        if(moodFaces)moodFaces.setAttribute('opacity','0');
+        if(fastWaves)fastWaves.setAttribute('opacity','0.12');
+        if(calmWaves)calmWaves.setAttribute('opacity','1');
+        if(serotonin){serotonin.textContent='Abnormal electrical waves: controlled';serotonin.setAttribute('fill','#34d399');}
+        if(neuro){neuro.textContent='Brain-wave activity becomes more stable and less chaotic';neuro.setAttribute('fill','#cbd5e1');}
+        if(reArrow)reArrow.setAttribute('opacity','0');
+        if(reBlock)reBlock.setAttribute('opacity','0');
+        if(reBlock2)reBlock2.setAttribute('opacity','0');
+        if(reText){reText.textContent='';}
+        if(pupil){pupil.setAttribute('r','4');}
+        if(sym){sym.textContent='Sympathetic tone: baseline';sym.setAttribute('fill','#8b90a5');}
+        if(sense){sense.textContent='Seizure activity: managed';sense.setAttribute('fill','#34d399');}
+        if(st){st.textContent='After antiseizure medication: abnormal waves are controlled';st.setAttribute('fill','#34d399');}
+        if(note){note.textContent='Antiseizure medications do not make the brain “happy”; they help manage abnormal electrical waves so firing becomes more controlled.';note.setAttribute('fill','#cbd5e1');}
+        indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Brain Waves</span><span class="val" style="color:var(--green)">Managed ✓</span></div><div class="indicator"><span style="color:var(--green)">Electrical Activity</span><span class="val" style="color:var(--green)">More stable</span></div><div class="indicator"><span style="color:var(--purple)">Goal</span><span class="val" style="color:var(--purple)">Seizure prevention</span></div>';
+      }
+    }
     else{
       indicators.innerHTML='<div class="indicator"><span style="color:var(--green)">Effect</span><span class="val" style="color:var(--green)">Applied ✓</span></div>';
     }
   } else {
-    // Reset
     btn.classList.remove('active-effect');
     btn.textContent='💊 Apply '+currentModule.classes[currentClassIdx].name;
     window._bodyEffectApplied=false;
     indicators.innerHTML='';
-    // Re-render to reset SVG
     showClassTabContent('body');
   }
 }
@@ -1633,7 +1882,7 @@ function renderSafetyRadar(cls,el){
   const expected = cls.watchFor.slice(0, 2).map(w => ({text: w, level: 'expected'}));
   const reportSoon = cls.watchFor.slice(2).map(w => ({text: w, level: 'report'}));
   const urgent = [{text: cls.report.replace('Report ',''), level: 'urgent'}];
-  const allItems = [...expected,...reportSoon,...urgent].sort(()=>Math.random()-.5);
+  const allItems = shuffleArrayStable([...expected,...reportSoon,...urgent]);
 
   el.innerHTML=`
     <div class="content-card ${medThemeClass(cls)}">
@@ -1713,6 +1962,73 @@ function dropItem(e,bucket){
 }
 
 // ===== PRACTICE QUIZ =====
+
+// ===== ANSWER OPTION ANTI-BIAS HELPERS =====
+// Keeps the original correct-answer index for scoring, but displays answer choices
+// with more similar lengths so students cannot game the quiz by choosing the longest answer.
+function shuffleArrayStable(items){
+  const arr=[...items];
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+function escapeHTML(str){
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+function optionPlainLength(str){
+  return String(str).replace(/\s+/g,' ').trim().length;
+}
+const neutralOptionPhrases=[
+  'clinical choice',
+  'safety detail',
+  'exam option',
+  'care decision',
+  'patient factor',
+  'scope detail',
+  'teaching point',
+  'documentation point',
+  'medication clue',
+  'provider concern',
+  'priority cue',
+  'test strategy'
+];
+function extendOptionToLength(text,target,seed){
+  let out=String(text).trim();
+  let phraseIndex=seed%neutralOptionPhrases.length;
+  // Add neutral clarifying language only when an answer is much shorter than the others.
+  // Semicolons are used instead of dashes.
+  while(optionPlainLength(out) < target-6){
+    const phrase=neutralOptionPhrases[phraseIndex%neutralOptionPhrases.length];
+    const proposed=out + '; ' + phrase;
+    if(optionPlainLength(proposed) > target+10) break;
+    out=proposed;
+    phraseIndex++;
+  }
+  return out;
+}
+function balancedShuffledOptions(q){
+  const opts=q.opts||[];
+  const lengths=opts.map(optionPlainLength);
+  const longest=Math.max(...lengths);
+  const shortest=Math.min(...lengths);
+  // If choices are already close, preserve original wording.
+  // If they are visibly biased, bring shorter options closer to the longest option.
+  const needsBalancing=(longest-shortest)>16;
+  const target=needsBalancing ? Math.min(Math.max(longest,52),96) : longest;
+  const balanced=opts.map((o,i)=>({
+    text: needsBalancing ? extendOptionToLength(o,target,i+q.q.length) : String(o),
+    origIdx:i
+  }));
+  return shuffleArrayStable(balanced);
+}
+
 function renderPracticeQuiz(cls,el){
   const qs=cls.questions||[];
   el.innerHTML=`
@@ -1728,12 +2044,12 @@ function renderPracticeQuiz(cls,el){
   `;
   const container=document.getElementById('practiceQuiz');
   qs.forEach((q,qi)=>{
-    const shuffled=q.opts.map((o,i)=>({text:o,origIdx:i})).sort(()=>Math.random()-.5);
+    const shuffled=balancedShuffledOptions(q);
     const div=document.createElement('div');div.className='quiz-q';
     div.innerHTML=`
       <div class="q-num">Question ${qi+1} of ${qs.length}</div>
       <div class="q-text">${q.q}</div>
-      <div class="quiz-opts">${shuffled.map((o,oi)=>`<button class="quiz-opt" data-qi="${qi}" data-oi="${o.origIdx}" onclick="answerPractice(this,${qi},${o.origIdx},${q.correct})">${o.text}</button>`).join('')}</div>
+      <div class="quiz-opts">${shuffled.map((o,oi)=>`<button class="quiz-opt" data-qi="${qi}" data-oi="${o.origIdx}" onclick="answerPractice(this,${qi},${o.origIdx},${q.correct})">${escapeHTML(o.text)}</button>`).join('')}</div>
       <div class="rationale" id="rat-${qi}">${q.rationale}</div>
     `;
     container.appendChild(div);
@@ -1795,7 +2111,7 @@ function renderFormativeQuiz(){
     (cls.questions||[]).forEach(q=>{allQs.push({...q,className:cls.name});});
   });
   // Pick 15 random
-  allQs.sort(()=>Math.random()-.5);
+  allQs=shuffleArrayStable(allQs);
   const qs=allQs.slice(0,Math.min(15,allQs.length));
   let score=0,answered=0;
 
@@ -1809,12 +2125,12 @@ function renderFormativeQuiz(){
   `;
   const qc=document.getElementById('formativeQuiz');
   qs.forEach((q,qi)=>{
-    const shuffled=q.opts.map((o,i)=>({text:o,origIdx:i})).sort(()=>Math.random()-.5);
+    const shuffled=balancedShuffledOptions(q);
     const div=document.createElement('div');div.className='quiz-q';
     div.innerHTML=`
       <div class="q-num">Question ${qi+1} of ${qs.length} <span class="badge badge-purple">${q.className}</span></div>
       <div class="q-text">${q.q}</div>
-      <div class="quiz-opts">${shuffled.map(o=>`<button class="quiz-opt" onclick="answerFormative(this,${qi},${o.origIdx},${q.correct},${qs.length})">${o.text}</button>`).join('')}</div>
+      <div class="quiz-opts">${shuffled.map(o=>`<button class="quiz-opt" data-oi="${o.origIdx}" onclick="answerFormative(this,${qi},${o.origIdx},${q.correct},${qs.length})">${escapeHTML(o.text)}</button>`).join('')}</div>
       <div class="rationale" id="frat-${qi}">${q.rationale}</div>
     `;
     qc.appendChild(div);
@@ -1899,7 +2215,7 @@ function renderFlashcards(){
 }
 
 function markFC(i,known){fcCards[i].known=known;renderFlashcards();}
-function shuffleFlashcards(){fcCards.sort(()=>Math.random()-.5);renderFlashcards();}
+function shuffleFlashcards(){fcCards=shuffleArrayStable(fcCards);renderFlashcards();}
 function showAllFlashcards(){fcShowReview=false;renderFlashcards();}
 function showReviewOnly(){fcShowReview=true;renderFlashcards();}
 
@@ -1936,8 +2252,8 @@ function renderMatching(){
 
   if(pairs.length===0){area.innerHTML='<p style="color:var(--text-muted)">No matching pairs available for this type.</p>';return;}
 
-  const leftItems=pairs.map(p=>p.left).sort(()=>Math.random()-.5);
-  const rightItems=pairs.map(p=>p.right).sort(()=>Math.random()-.5);
+  const leftItems=shuffleArrayStable(pairs.map(p=>p.left));
+  const rightItems=shuffleArrayStable(pairs.map(p=>p.right));
   const pairMap={};pairs.forEach(p=>pairMap[p.left]=p.right);
 
   area.innerHTML=`
@@ -1992,13 +2308,13 @@ function initScenariosHub(){
   const container=document.getElementById('scenarioContent');
   container.innerHTML='';
   SCENARIOS.forEach((s,si)=>{
-    const shuffled=s.opts.map((o,i)=>({text:o,origIdx:i})).sort(()=>Math.random()-.5);
+    const shuffled=balancedShuffledOptions({q:s.text||'', opts:s.opts});
     const div=document.createElement('div');div.className='scenario-card';
     div.innerHTML=`
       <div class="patient">Scenario ${si+1} <span class="badge badge-purple">${s.category||''}</span></div>
       <div class="scenario-text">${s.text}</div>
       <div class="q-text" style="font-weight:600;margin-bottom:12px">${s.question}</div>
-      <div class="quiz-opts">${shuffled.map(o=>`<button class="quiz-opt" onclick="answerScenario(this,${o.origIdx},${s.correct})">${o.text}</button>`).join('')}</div>
+      <div class="quiz-opts">${shuffled.map(o=>`<button class="quiz-opt" onclick="answerScenario(this,${o.origIdx},${s.correct})">${escapeHTML(o.text)}</button>`).join('')}</div>
       <div class="rationale" id="srat-${si}">${s.rationale}</div>
     `;
     container.appendChild(div);
@@ -2019,7 +2335,7 @@ let summativeScore={},summativeAnswered=0;
 function initSummative(){
   const container=document.getElementById('summativeContent');
   summativeScore={};summativeAnswered=0;
-  const qs=[...SUMMATIVE_QUESTIONS].sort(()=>Math.random()-.5);
+  const qs=shuffleArrayStable([...SUMMATIVE_QUESTIONS]);
 
   container.innerHTML=`
     <div class="quiz-container" id="summativeQuiz"></div>
@@ -2028,12 +2344,12 @@ function initSummative(){
 
   const qc=document.getElementById('summativeQuiz');
   qs.forEach((q,qi)=>{
-    const shuffled=q.opts.map((o,i)=>({text:o,origIdx:i})).sort(()=>Math.random()-.5);
+    const shuffled=balancedShuffledOptions(q);
     const div=document.createElement('div');div.className='quiz-q';
     div.innerHTML=`
       <div class="q-num">Question ${qi+1} of ${qs.length} <span class="badge badge-purple">${q.cat}</span></div>
       <div class="q-text">${q.q}</div>
-      <div class="quiz-opts">${shuffled.map(o=>`<button class="quiz-opt" data-cat="${q.cat}" onclick="answerSummative(this,${o.origIdx},${q.correct},'${q.cat}',${qs.length})">${o.text}</button>`).join('')}</div>
+      <div class="quiz-opts">${shuffled.map(o=>`<button class="quiz-opt" data-cat="${q.cat}" onclick="answerSummative(this,${o.origIdx},${q.correct},'${q.cat}',${qs.length})">${escapeHTML(o.text)}</button>`).join('')}</div>
       <div class="rationale" id="sumrat-${qi}">${q.rationale}</div>
     `;
     qc.appendChild(div);
